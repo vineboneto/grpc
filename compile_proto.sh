@@ -15,6 +15,6 @@ yarn grpc_tools_node_protoc \
   --plugin=protoc-gen-grpc=${PROTOC_GEN_GRPC_PATH} \
   --js_out=import_style="commonjs,binary":$PROTO_DIR \
   --ts_out=service=grpc-node:$OUT_DIR \
-  --grpc_out=$OUT_DIR \
+  --grpc_out=grpc_js:$OUT_DIR \
   --proto_path=$OUT_DIR \
   $OUT_DIR/*.proto
