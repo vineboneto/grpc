@@ -1,7 +1,7 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 'use strict';
-var grpc = require('grpc');
+var grpc = require('@grpc/grpc-js');
 var product_pb = require('./product_pb.js');
 
 function serialize_product_Empty(arg) {
@@ -49,9 +49,9 @@ function deserialize_product_ProductResponse(buffer_arg) {
 }
 
 
-var ProductServiceService = exports.ProductServiceService = {
-  createProduct: {
-    path: '/product.ProductService/CreateProduct',
+var ProductsService = exports.ProductsService = {
+  create: {
+    path: '/product.Products/Create',
     requestStream: false,
     responseStream: false,
     requestType: product_pb.ProductRequest,
@@ -61,8 +61,8 @@ var ProductServiceService = exports.ProductServiceService = {
     responseSerialize: serialize_product_ProductResponse,
     responseDeserialize: deserialize_product_ProductResponse,
   },
-  listProduct: {
-    path: '/product.ProductService/ListProduct',
+  list: {
+    path: '/product.Products/List',
     requestStream: false,
     responseStream: false,
     requestType: product_pb.Empty,
@@ -74,4 +74,4 @@ var ProductServiceService = exports.ProductServiceService = {
   },
 };
 
-exports.ProductServiceClient = grpc.makeGenericClientConstructor(ProductServiceService);
+exports.ProductsClient = grpc.makeGenericClientConstructor(ProductsService);

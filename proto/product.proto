@@ -22,7 +22,7 @@ message ProductList {
 
 message Empty {}
 
-service ProductService {
-  rpc CreateProduct (ProductRequest) returns (ProductResponse) {}
-  rpc ListProduct (Empty) returns (ProductList) {}
+service Products {
+  rpc Create (ProductRequest) returns (ProductResponse) {}
+  rpc List (Empty) returns (ProductList) {}
 }
