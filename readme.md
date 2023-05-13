@@ -2,9 +2,10 @@
 
 ## Inciando
 
-```
+```bash
 # Compilar proto
 $ bash ./compile_proto.sh # linux
+$ ./compile_proto.ps1 # windows
 
 # Desenvolvimento
 $ yarn dev:server

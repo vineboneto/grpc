@@ -1,2 +1,4 @@
 node_modules
 dist
+/proto/*.js
+/proto/*.ts
