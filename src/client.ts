@@ -1,24 +1,39 @@
 import { ChannelCredentials } from '@grpc/grpc-js'
 import { ProductsClient } from '../proto/product_grpc_pb'
 import { Empty, Product, ProductList, ProductRequest, ProductResponse } from '../proto/product_pb'
+import { promisify } from 'util'
 
-const client = new ProductsClient('0.0.0.0:50052', ChannelCredentials.createInsecure())
 
-const product = new Product()
-product.setId('3')
-product.setName('Product 3')
-product.setDescription('Description 3')
-const request = new ProductRequest()
-request.setProduct(product)
+function makeProduct() {
+  const product = new Product()
+  product.setId('3')
+  product.setName('Product 3')
+  product.setDescription('Description 3')
+  return product
+}
 
-client.create(request, (err: any, response: ProductResponse) => {
-  if (err) console.log(err)
+function makeRequest() {
+  const request = new ProductRequest()
+  request.setProduct(makeProduct())
+  return request
+}
 
-  console.log(response.getProduct()?.toObject())
-})
+async function main() {
+  const client = new ProductsClient('0.0.0.0:50052', ChannelCredentials.createInsecure())
+  
+  const createAsync = promisify<ProductRequest, ProductResponse>(client.create).bind(client);
+  const listAsync = promisify<Empty, ProductList>(client.list).bind(client);
+  
+  try {
+    const response1 = await createAsync(makeRequest())
+    console.log(response1.getProduct()?.toObject())
+    
+    const response2 = await listAsync(new Empty())
+    console.log(response2.getProductsList().map((p) => p.toObject()))
+  } catch(err) {
+    console.log(err)
+  }
+}
 
-client.list(new Empty(), (err: any, response: ProductList) => {
-  if (err) console.log(err)
+main()
 
-  console.log(response.getProductsList().map((p) => p.toObject()))
-})

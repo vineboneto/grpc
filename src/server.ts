@@ -8,6 +8,7 @@ const products: Product.AsObject[] = [
   { id: "2", name: "Product 2", description: "Description 2" },
 ];
 
+
 class ProductServer implements IProductsServer {
   [name: string]: UntypedHandleCall;
 
@@ -50,7 +51,6 @@ class ProductServer implements IProductsServer {
 }
 
 const server = new Server();
-
 server.addService(ProductsService as any, new ProductServer());
 server.bindAsync('0.0.0.0:50052', ServerCredentials.createInsecure(), (err, port) => {
   if (err) throw err
