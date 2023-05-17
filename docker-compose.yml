@@ -8,6 +8,7 @@ services:
     container_name: grpc
     command: >
       /bin/bash -c "
+        bash compile_proto.sh &&
         yarn build &&
         yarn start:server
       "
